@@ -1,6 +1,11 @@
 
 ## Ngrx (with NgRx Data) - The Complete Guide
 
+## Development commands
+
+Running Back-end: npm run server
+Running Front-end: npm start
+
 This repository contains the code of the video course [Ngrx (with NgRx Data) - The Complete Guide](https://angular-university.io/course/ngrx-course).
 
 This course repository is updated to Angular v12:
