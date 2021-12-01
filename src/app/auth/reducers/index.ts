@@ -1,3 +1,4 @@
+import { NumberValueAccessor } from '@angular/forms';
 import {
   ActionReducer,
   ActionReducerMap,
@@ -12,16 +13,20 @@ import { User } from '../model/user.model';
 
 export interface AuthState {
   user: User;
+  logins: number;
 }
 
 export const initialAuthState: AuthState = {
-  user: undefined
+  user: undefined,
+  logins: 0
 }
 
 export const authReducer = createReducer(
   initialAuthState,
   on(AuthActions.login, (state, action) => {
     return {
+      ...state,
+      logins: ++state.logins,
       user: action.user
     };
   })
