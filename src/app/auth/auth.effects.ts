@@ -12,6 +12,11 @@ export class AuthEffects {
     tap(action => localStorage.setItem('user', JSON.stringify(action.user)))
   ), {dispatch: false}); // Prevent infinite loop
 
+  logout$ = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.logout),
+    tap(action => this.router.navigateByUrl('/login'))
+  ), {dispatch: false});
+
   constructor(
     private actions$: Actions,
     private router: Router
