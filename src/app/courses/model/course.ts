@@ -1,5 +1,6 @@
 
 export interface Course {
+  // courseId: number; // Can be used with selectId in reducers
   id: number;
   seqNo:number;
   url:string;
