@@ -12,18 +12,22 @@ import { compareCourses, Course } from "../model/course";
 // }
 
 // Even better is using EntityState<Course>
-export interface CoursesState extends EntityState<Course> {}
+export interface CoursesState extends EntityState<Course> {
+  allCoursesLoaded: boolean;
+}
 
 export const adapter = createEntityAdapter<Course>({
   sortComparer: compareCourses,
   // selectId: course => course.courseId // If using custom id name instead of id
 });
 
-export const initialCoursesState = adapter.getInitialState();
+export const initialCoursesState = adapter.getInitialState({
+  allCoursesLoaded: false
+});
 
 export const coursesReducer = createReducer(
   initialCoursesState,
-  on(CourseActions.allCoursesLoaded, (state, action) => adapter.addAll(action.courses, state))
+  on(CourseActions.allCoursesLoaded, (state, action) => adapter.addAll(action.courses, {...state, allCoursesLoaded: true}))
 );
 
 export const {
