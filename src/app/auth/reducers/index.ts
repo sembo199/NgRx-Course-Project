@@ -33,7 +33,7 @@ export const authReducer = createReducer(
 
     return {
       ...state,
-      logins: ++state.logins,
+      logins: state.logins + 1,
       user: action.user
     };
   }),
