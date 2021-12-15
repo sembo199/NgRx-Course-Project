@@ -1,47 +1,40 @@
-import { NumberValueAccessor } from '@angular/forms';
 import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createReducer,
-  createSelector,
-  MetaReducer,
-  on
+    ActionReducer,
+    ActionReducerMap,
+    createFeatureSelector, createReducer,
+    createSelector,
+    MetaReducer, on
 } from '@ngrx/store';
-import { AuthActions } from '../action-types';
-import { User } from '../model/user.model';
+import {User} from '../model/user.model';
+import {AuthActions} from '../action-types';
+
+
 
 export interface AuthState {
-  user: User;
-  logins: number;
+    user: User
 }
 
 export const initialAuthState: AuthState = {
-  user: undefined,
-  logins: 0
-}
+    user: undefined
+};
 
 export const authReducer = createReducer(
 
-  initialAuthState,
+    initialAuthState,
 
-  on(AuthActions.login, (state, action) => {
+    on(AuthActions.login, (state, action) => {
+        return {
+            user: action.user
+        }
+    }),
 
-    console.log("Calling Login Reducer");
+    on(AuthActions.logout, (state, action) => {
+        return {
+            user: undefined
+        }
+    })
 
-    // debugger;
 
-    return {
-      ...state,
-      logins: state.logins + 1,
-      user: action.user
-    };
-  }),
 
-  on(AuthActions.logout, (state, action) => {
-    return {
-      ...state,
-      user: undefined
-    };
-  })
 );
+
